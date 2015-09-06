@@ -27,6 +27,15 @@ extension Int64: Decodable {
   }
 }
 
+extension UInt: Decodable {
+  public static func decode(j: JSON) -> Decoded<UInt> {
+    switch j {
+    case let .Number(n): return pure(n as UInt)
+    default: return typeMismatch("UInt", forObject: j)
+    }
+  }
+}
+
 extension Double: Decodable {
   public static func decode(j: JSON) -> Decoded<Double> {
     switch j {
